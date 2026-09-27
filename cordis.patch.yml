@@ -1,0 +1,19 @@
+# dsh-managed-tool-executions bundle patch.
+# Pi parity (patch/managed-tool-executions): AI-invoked bash detaches to a
+# managed background job after 600s when no timeout is given or the requested
+# timeout is greater than 1200s. DSH clamps executor-side with
+# min(requested ?? timeoutMs, maxTimeoutMs), so timeoutMs=600000 +
+# maxTimeoutMs=600000 reproduces both rules exactly (the promote path keeps
+# the process alive with onExpiry: "none" and hands back the job id).
+- id: bash-sandbox
+  config:
+    timeoutMs: 600000
+    maxTimeoutMs: 600000
+# (The TUI profile composes bash-sandbox as ctx.shell; a composition using the
+# plain local executor instead can add the same two values to its `bash-local`
+# row.)
+# Model-facing tool_task facade over ctx.jobs (list/info/wait/cancel,
+# wait bounded at 1800s), the Pi tool_task surface.
+- insert:
+    - id: tool-task
+      name: dsh-managed-tool-executions

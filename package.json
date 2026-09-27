@@ -1,0 +1,51 @@
+{
+  "name": "dsh-managed-tool-executions",
+  "version": "0.1.0",
+  "description": "Pi managed-tool-executions parity for DeepSeek Harness: 600s background-detach thresholds for AI bash calls plus the model-facing tool_task management tool over ctx.jobs",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "README.md",
+    "BEHAVIOR.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "cordis",
+    "pi",
+    "background-jobs"
+  ],
+  "author": "Xiangzhe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xz-dev/dsh-managed-tool-executions.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-jobs": "0.1.7-rc.2",
+    "@deepseek-ai/dsh-tools": "0.1.7-rc.2"
+  },
+  "devDependencies": {
+    "@deepseek-ai/dsh-tools": "0.1.7-rc.2"
+  }
+}
